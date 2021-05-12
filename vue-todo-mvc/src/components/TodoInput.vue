@@ -5,21 +5,28 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fas fa-plus addBtn"
     /></span>
+    <modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">custom header</h3>
+    </modal>
   </div>
 </template>
 
 <script>
+import Modal from "./common/Modal.vue";
 export default {
   data() {
     return {
       newTodoItem: "",
+      showModal: false,
     };
   },
+  components: { Modal },
   methods: {
     addTodo: function() {
       if (this.newTodoItem !== "") {
         this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
+      } else {
       }
     },
     clearInput: function() {
