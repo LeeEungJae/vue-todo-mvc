@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li
-        v-for="(todoItem, index) in todoItems"
+        v-for="(todoItem, index) in propsdata"
         v-bind:key="index"
         class="shadow"
       >
@@ -26,27 +26,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
-  created: function() {
-    //인스턴스가 생성되자마자 실행되는 라이프사이클 훅
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-      }
-    }
-  },
+  props: ["propsdata"],
   methods: {
     removeTodo: function(todoItem, index) {
       localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);
+      this.propsdata.splice(index, 1);
     },
     toggleComplete: function(todoItem) {
       todoItem.completed = !todoItem.completed;
