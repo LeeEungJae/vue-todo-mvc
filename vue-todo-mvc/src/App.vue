@@ -29,7 +29,7 @@ export default {
     TodoList,
     TodoFooter,
   },
-  created: function() {
+  created() {
     //인스턴스가 생성되자마자 실행되는 라이프사이클 훅
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    addOneItem: function(newTodoItem) {
+    addOneItem(newTodoItem) {
       const obj = {
         completed: false,
         item: newTodoItem,
@@ -50,16 +50,16 @@ export default {
       localStorage.setItem(newTodoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem: function(todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem);
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem: function(todoItem, index) {
+    toggleOneItem(todoItem, index) {
       this.todoItems[index].completed = !this.todoItems[index].completed;
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItem: function() {
+    clearAllItem() {
       localStorage.clear();
       this.todoItems = [];
     },
